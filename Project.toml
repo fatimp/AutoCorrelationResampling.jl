@@ -1,0 +1,17 @@
+name = "AutoCorrelationResampling"
+uuid = "7721453b-5e57-40b4-b973-78d00789d4c1"
+authors = ["Vasily Postnicov <shamaz.mazum@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+
+[compat]
+julia = "^1.0"
+
+[extras]
+FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
+XUnit = "3e3c03f2-1a94-11e9-2981-050a4ca824ab"
+
+[targets]
+test = ["XUnit", "FFTW"]
