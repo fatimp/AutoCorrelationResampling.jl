@@ -1,4 +1,5 @@
 # AutoCorrelationResampling
+[![CI](https://github.com/shamazmazum/AutoCorrelationResampling.jl/actions/workflows/test.yml/badge.svg)](https://github.com/shamazmazum/AutoCorrelationResampling.jl/actions/workflows/test.yml)
 
 This package provides means to resample (currently, only upsampling is
 supported) of autocorrelation functions.
