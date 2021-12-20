@@ -11,7 +11,7 @@ function ac_upsample(ac     :: AbstractArray{T, 3},
     x, y, z = s[1], s[2], s[3]
 
     # Restored autocorrelation function
-    n = length(filter)
+    n = length(filter) + 1
     ac_up = zeros(T, (x, y, n*z))
 
     ## To preserve "energy" of a signal
@@ -28,13 +28,8 @@ function ac_upsample(ac     :: AbstractArray{T, 3},
         nexteven = ac_up[:,:,mod1(k + n, n*z)]
 
         for l in 1:n-1
-            ac_up[:,:,k + l] = filter[l+1]*cureven + filter[n-l+1]*nexteven
+            ac_up[:,:,k + l] = filter[l]*cureven + filter[n-l]*nexteven
         end
-    end
-
-    # This step is actually not needed, because filter[1] is always 1.
-    for k in 1:n:n*z
-        ac_up[:,:,k] = filter[1] * ac_up[:,:,k]
     end
 
     return ac_up

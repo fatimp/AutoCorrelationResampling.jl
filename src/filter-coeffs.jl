@@ -1,8 +1,12 @@
+# Central coefficient
+ccentral(coeff :: VoF) = 1 / (length(coeff) + 1)
+
 # Sum of all filter coefficients
-csum(coeff :: VoF) = coeff[1]  + 2sum(coeff[2:end])
+csum(coeff :: VoF) = ccentral(coeff) + 2sum(coeff)
 
 # Filter evaluated at point `z`
-fn(coeff :: VoF, z :: Complex) = coeff[1] + sum(c*(z^n + z^-n) for (n, c) in enumerate(coeff[2:end]))
+fn(coeff :: VoF, z :: Complex) =
+    ccentral(coeff) + sum(c*(z^n + z^-n) for (n, c) in enumerate(coeff))
 
 cnonnegative(coeff :: VoF) =
     2000 * max(0, -minimum(real(fn(coeff, exp(2π * x * im))) for x in 0:0.001:1))
@@ -20,9 +24,7 @@ cnonnegative(coeff :: VoF) =
 #
 # The coefficients found by minimizing `targetfn` are not unique.
 function targetfn(coeff :: VoF)
-    len = length(coeff) + 1
-    coeff1 = vcat([1/len], coeff)
-    return cnonnegative(coeff1) + (csum(coeff1) - 1)^2
+    return cnonnegative(coeff) + (csum(coeff) - 1)^2
 end
 
 """
@@ -37,6 +39,10 @@ A keyword argument `initial` can be an array of length `length - 1`
 which works as an initial guess for filter coefficients.
 """
 function filter_coeffs(length :: Integer; initial :: VoF = 0.5 * ones(Float64, (length - 1)))
-    res = optimize(targetfn, initial, length > 2 ? NelderMead() : SimulatedAnnealing())
-    return vcat([1/length], Optim.minimizer(res))
+    if length == 2
+        return [0.25]
+    else
+        res = optimize(targetfn, initial)
+        return Optim.minimizer(res)
+    end
 end
