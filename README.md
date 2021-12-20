@@ -1,8 +1,7 @@
 # AutoCorrelationResampling
 [![CI](https://github.com/shamazmazum/AutoCorrelationResampling.jl/actions/workflows/test.yml/badge.svg)](https://github.com/shamazmazum/AutoCorrelationResampling.jl/actions/workflows/test.yml)
 
-This package provides means to resample (currently, only upsampling is
-supported) of autocorrelation functions.
+This package provides means to resample autocorrelation functions.
 
 Autocorrelation function of one variable is a Laurent polynomial on ℝ in the
 form $s(x) = f(x)f(x^{-1})$ where $f(x)$ is a usual polynomial on ℝ.
@@ -32,7 +31,8 @@ can do the following:
 
 ## How to use?
 
-Upsampling is done by `ac_upsample` function which takes an autocorrelation
-array and a low-pass filter. A low-pass filter can be obtained with
-`filter_coeffs` function. These filters are not unique, you can play with them
-supplying different argument `initial` to `filter_coeffs`.
+Resampling is done by `ac_resample` function which takes an autocorrelation
+array and a resample ratio. An optional low-pass filter can be passed to
+`ac_resample` and by default is obtained with `filter_coeffs` function. These
+filters are not unique, you can play with them supplying different argument
+`initial` to `filter_coeffs`.

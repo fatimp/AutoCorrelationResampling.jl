@@ -46,3 +46,6 @@ function filter_coeffs(length :: Integer; initial :: VoF = 0.5 * ones(Float64, (
         return Optim.minimizer(res)
     end
 end
+
+# Filter length function
+filter_length(ratio) = max(numerator(ratio), denominator(ratio))

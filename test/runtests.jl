@@ -2,4 +2,4 @@ using AutoCorrelationResampling
 using XUnit
 using FFTW
 
-@testset "Test upsampling" begin include("upsampling.jl") end
+@testset "Test resampling" begin include("resampling.jl") end
