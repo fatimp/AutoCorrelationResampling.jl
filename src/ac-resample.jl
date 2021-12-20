@@ -8,7 +8,7 @@ becomes an array of shape `(x,y,ratio * z)`.
 function ac_resample(ac     :: AbstractArray{T, 3},
                      ratio  :: Union{Integer, Rational};
                      filter :: VoF = ratio |> filter_length |> filter_coeffs) where T <: AF
-    x, y, z = let s = size(ac); s[1], s[2], s[3] end
+    x, y, z = size(ac)
 
     # Upsampling coefficient
     n = numerator(ratio)
