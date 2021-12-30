@@ -1,7 +1,7 @@
 name = "AutoCorrelationResampling"
 uuid = "7721453b-5e57-40b4-b973-78d00789d4c1"
 authors = ["Vasily Postnicov <shamaz.mazum@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Optim = "429524aa-4258-5aef-a3af-852621145aeb"
