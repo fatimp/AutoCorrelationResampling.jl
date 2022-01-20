@@ -38,13 +38,10 @@ upscaling autocorrelations function `n` times.
 A keyword argument `initial` can be an array of length `length - 1`
 which works as an initial guess for filter coefficients.
 """
-function filter_coeffs(length :: Integer; initial :: VoF = 0.5 * ones(Float64, (length - 1)))
-    if length == 2
-        return [0.25]
-    else
-        res = optimize(targetfn, initial)
-        return Optim.minimizer(res)
-    end
+function filter_coeffs(length  :: Integer;
+                       initial :: VoF = fill(0.95/(2length-1), length-1))
+    res = optimize(targetfn, initial)
+    return Optim.minimizer(res)
 end
 
 # Filter length function
