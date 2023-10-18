@@ -1,5 +1,4 @@
 module AutoCorrelationResampling
-using Optim
 using Base.Iterators
 
 AV  = AbstractVector
